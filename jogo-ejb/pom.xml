@@ -1,0 +1,133 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>jogo-ejb</artifactId>
+  <packaging>ejb</packaging>
+
+  <name>jogo-ejb</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+	      <groupId>junit</groupId>
+	      <artifactId>junit</artifactId>
+	      <version>3.8.1</version>
+	      <scope>test</scope>
+    </dependency>
+    <dependency>
+		<groupId>com</groupId>
+		<artifactId>jogo-jpa</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate.javax.persistence</groupId>
+		<artifactId>hibernate-jpa-2.0-api</artifactId>
+		 <version>1.0.1.Final</version>
+		<scope>provided</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+	<dependency>
+	    <groupId>javax.validation</groupId>
+	    <artifactId>validation-api</artifactId>
+	    <version>1.0.0.GA</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-validator</artifactId>
+	    <version>4.1.0.Final</version>
+	</dependency> 
+	<dependency>
+	    <groupId>javax</groupId>
+	    <artifactId>javaee-api</artifactId>
+	    <version>7.0</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.enterprise</groupId>
+		<artifactId>cdi-api</artifactId>
+		<version>1.0</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+		<version>9.3-1100-jdbc41</version>
+	</dependency>	
+	<dependency>
+		<groupId>com.sun.jersey</groupId>
+		<artifactId>jersey-client</artifactId>
+		<version>1.19</version>
+	</dependency>
+	<dependency>
+		<groupId>com.google.code.gson</groupId>
+		<artifactId>gson</artifactId>
+		<version>2.5</version>
+	</dependency>
+	
+	<!-- Dependency jars para web service Rest -->
+	<dependency>
+	     <groupId>org.jboss.resteasy</groupId>
+	     <artifactId>resteasy-jaxrs</artifactId>
+	     <version>2.2.2.GA</version>
+	     <scope>provided</scope>
+	</dependency>
+   	<dependency>
+     	<groupId>org.jboss.resteasy</groupId>
+     	<artifactId>resteasy-jaxb-provider</artifactId>
+     	<version>2.2.2.GA</version>
+     	<scope>provided</scope>
+  	</dependency>
+   	<dependency>
+    	<groupId>org.jboss.resteasy</groupId>
+     	<artifactId>resteasy-jettison-provider</artifactId>
+     	<version>2.2.2.GA</version>
+     	<scope>provided</scope>
+   	</dependency>	
+		
+	<!-- Dependenciar para o Web service Axis -->
+	
+	<dependency>
+		<groupId>axis</groupId>
+		<artifactId>axis</artifactId>
+		<version>1.4</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>commons-discovery</groupId>
+		<artifactId>commons-discovery</artifactId>
+		<version>0.2</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.2</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.apache.axis</groupId>
+		<artifactId>axis-jaxrpc</artifactId>
+		<version>1.4</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.apache.axis</groupId>
+		<artifactId>axis-saaj</artifactId>
+		<version>1.4</version>
+	</dependency>
+			
+	<dependency>
+		<groupId>wsdl4j</groupId>
+		<artifactId>wsdl4j</artifactId>
+		<version>1.5.2</version>
+	</dependency>
+  </dependencies>
+  <parent>
+  	<groupId>com</groupId>
+  	<artifactId>jogo</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<relativePath>../jogo</relativePath>
+  </parent>
+</project>

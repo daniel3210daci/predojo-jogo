@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head>
+		<title><ui:insert name="title">#{msgs.lbltitulopagina}</ui:insert></title>
+	
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+				<link type="text/css" rel="stylesheet"
+					href="#{request.contextPath}/css/default.css" />
+				<link type="text/css" rel="stylesheet"
+					href="#{request.contextPath}/syntaxhighlighter/styles/syntaxhighlighter.css"></link>
+		
+			<link type="text/css" rel="stylesheet" href="#{request.contextPath}/bootstrap/css/bootstrap.css" />
+			<link type="text/css" rel="stylesheet" href="#{request.contextPath}/bootstrap/css/bootstrap.min.css" />
+		  	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/bootstrap/css/bootstrap-responsive.min.css" />
+		  	
+		  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		  	
+		  <f:facet name="first">
+			<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+			<title>#{msgs.tituloPaginaJogos}</title>
+		  </f:facet>
+		  
+		  <!-- forcando o growl a ficar um pouco mais abaixo -->
+		  <style type="text/css">
+			  .ui-growl {
+					position: fixed;
+					margin-top: 6%;
+					width: 280px;
+				}
+				.ui-growl-message {
+					padding: 0 0 5px 0;
+					width: 200px;
+					float: right;
+				}
+			</style>
+	  
+	</h:head>
+<h:body >
+<ui:composition template="/templates/default.xhtml">
+<ui:define name="layoutContent">
+
+	<div class="row" style="margin-top: 8%"> </div>
+		<h:form id="form" enctype="multipart/form-data" prependId="false" >
+			<p:growl id="mensagens" />
+			<p:fieldset style="margin-top: 0px">
+				<div class="row-fluid" style="margin-left: 0px">
+			        <div class="offset2 span5">
+			        	<p:panelGrid columns="1">
+				        	<h:outputText styleClass="fontForm" value="#{msgs.tituloPaginaJogos}" /><h:outputText />
+					    </p:panelGrid>
+			        </div>
+			    </div>    
+			    <br />
+			    <br />
+			    <div class="row-fluid" style="margin-left: 0px">
+			        <div class="offset2 span5">
+			        	<p:commandButton id="btlerLog" image="ui-icon-plus" value="#{msgs.btnlerlog}" style="top: -2px; margin-left: 3px;" process="@form" ajax="true" action="#{jogoMb.lerarquivolog}" update=":form" onstart="statusDialog.show();" oncomplete="statusDialog.hide();"/> <br />
+			        	<p:commandButton id="btverArmapreferida" image="ui-icon-plus" value="#{msgs.btnArmapreferidaGanhador}" style="top: -2px; margin-left: 3px;" process="@form" ajax="true" action="#{jogoMb.verificaarmapreferida}" update=":form" onstart="statusDialog.show();" oncomplete="statusDialog.hide();"/> <br />
+			        	<p:commandButton id="btverVencedorSemMorrer" image="ui-icon-plus" value="#{msgs.btnJogadorVencedorSemMorer}" style="top: -2px; margin-left: 3px;" process="@form" ajax="true" action="#{jogoMb.verificajogadorvencedorsemmorrer}" update=":form" onstart="statusDialog.show();" oncomplete="statusDialog.hide();"/> <br />
+			        	<p:commandButton id="btnPartidas" image="ui-icon-plus" value="#{msgs.btnPartidas}" onclick="$('#partidaSearch').modal('show');" update=":form1" style="top: -2px; margin-left: 3px;"/> <br />
+			        	<p:commandButton id="btnVerganhadores" image="ui-icon-plus" value="#{msgs.binVerganhadores}" onclick="$('#jogadoresSearch').modal('show');" update=":form2" style="top: -2px; margin-left: 3px;"/>
+			        </div>
+		        </div>
+		        <br />
+		        <br />
+				<h:form id="form1" prependId="false" >
+					<div id="partidaSearch" class="modal hide fade">
+					    <p:hotkey bind="esc" handler="$('#partidaSearch').modal('hide');" />
+					    <div class="modal-header" style="text-align: right;">        
+					        <a class="btnx" id="btnClosepartidaFind" onclick="$('#partidaSearch').modal('hide');">
+					        	<h:outputText value="#{msgs.msgFechar}" />
+							</a>
+					    </div>
+					    <div id="contentDialogPartidaSearch" class="modal-body" style="height: 75%; overflow-y: auto;">
+					    	<p:dataTable id="tablePartida" var="partida" value="#{jogoMb.partidaJogadorModel}" selection="#{jogoMb.partidasJogador}" emptyMessage="#{msgs.labelNoRecords}" >  
+						        <f:facet name="header">  
+						           <h:outputText value="#{msgs.lblcodigo}" />  
+						        </f:facet> 
+						        <p:column selectionMode="multiple" style="width:2%" /> 
+						        <p:column headerText="#{msgs.lblcodigo}" >  
+						            <h:outputText value="#{partida.codPartida}" />
+						        </p:column>  
+						        <p:column headerText="#{msgs.lbljogadores}">  
+						            <h:outputText value="#{partida.jogador}" />
+						        </p:column>
+						        <p:column headerText="#{msgs.lblmortes}">  
+						            <h:outputText value="#{partida.qtdMortes}" />
+						        </p:column>
+						        <p:column headerText="#{msgs.lblmortes}">  
+						            <h:outputText value="#{partida.qtdMortestotal}" />
+						        </p:column>
+					    	</p:dataTable>
+						</div>    
+					</div>
+				</h:form>
+				<h:form id="form2" prependId="false" >
+					<div id="jogadoresSearch" class="modal hide fade">
+					    <p:hotkey bind="esc" handler="$('#jogadoresSearch').modal('hide');" />
+					    <div class="modal-header" style="text-align: right;">        
+					        <a class="btnx" id="btnClosejogadoresFind" onclick="$('#jogadoresSearch').modal('hide');">
+					        	<h:outputText value="#{msgs.msgFechar}" />
+							</a>
+					    </div>
+					    <div id="jogadoresSearch" class="modal-body" style="height: 75%; overflow-y: auto;">
+					    	<p:dataTable id="tableJogadores" var="jogador" value="#{jogoMb.jogoDataModel}" selection="#{jogoMb.jogadores}" emptyMessage="#{msgs.labelNoRecords}" >  
+						        <f:facet name="header">  
+						           <h:outputText value="#{msgs.lbljogadores}" />  
+						        </f:facet> 
+						        <p:column selectionMode="multiple" style="width:2%" /> 
+						        <p:column headerText="#{msgs.lblcodigo}" >  
+						            <h:outputText value="#{jogador.id}" />
+						        </p:column>  
+						        <p:column headerText="#{msgs.lbljogadores}">  
+						            <h:outputText value="#{partida.nome}" />
+						        </p:column>
+						        <p:column headerText="#{msgs.lblarma}">  
+						            <h:outputText value="#{partida.armas}" />
+						        </p:column>
+					    	</p:dataTable>
+						</div>    
+					</div>
+				</h:form>
+			<br />
+			<br />
+			<br />
+			</p:fieldset>
+		</h:form>
+	<p:dialog id="dialog" modal="true" appendToBody="true" widgetVar="statusDialog" header="#{msgs.aguarde}" draggable="false" resizable="false" style="margin-top: 38%; margin-left: 40%;">
+		<p:graphicImage value="/images/ajaxloadingbar.gif" style="margin-left: 20px;"/>
+	</p:dialog>
+</ui:define>
+</ui:composition>
+</h:body>
+</html>

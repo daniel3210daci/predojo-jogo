@@ -1,0 +1,111 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	
+	<welcome-file-list>
+   		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<security-constraint>
+		<display-name>Restrict access to XHTML documents</display-name>
+		<web-resource-collection>
+			<web-resource-name>XHTML</web-resource-name>
+			<url-pattern>*.xhtml</url-pattern>
+		</web-resource-collection>
+		<auth-constraint />
+	</security-constraint>
+
+	  <servlet>
+	    <servlet-name>Faces Servlet</servlet-name>
+	    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>Faces Servlet</servlet-name>
+	    <url-pattern>*.jsf</url-pattern>
+	  </servlet-mapping>
+	  
+	  <context-param>
+	    	<param-name>resteasy.servlet.mapping.prefix</param-name>
+	    	<param-value>/rest</param-value>
+	  </context-param>
+ 
+	  <context-param>
+	    	<param-name>resteasy.scan</param-name>
+	    	<param-value>true</param-value>
+	  </context-param>
+ 
+	  <servlet>
+	    	<servlet-name>RestServlet</servlet-name>
+	    	<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+	    	<load-on-startup>1</load-on-startup>
+	  </servlet>
+	 
+	  <servlet-mapping>
+	    	<servlet-name>RestServlet</servlet-name>
+	    	<url-pattern>/rest/*</url-pattern>
+	  </servlet-mapping>
+
+	<!-- upload de arquivos -->
+	<filter>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+		<dispatcher>REQUEST</dispatcher>
+    	<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>	
+	
+	<context-param>
+    	<description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
+    	<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    	<param-value>server</param-value>
+  	</context-param>
+  
+	<context-param>
+    	<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+    	<param-value>resources.application</param-value>
+  	</context-param>
+
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/error.jsf</location>
+	</error-page>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/index.jsf</location>
+	</error-page>
+	
+	<context-param>
+    	<param-name>primefaces.THEME</param-name>
+    	<param-value>overcast</param-value>
+  	</context-param>
+  	
+  	<context-param>
+  		<param-name>primefaces.UPLOADER</param-name>
+  		<param-value>auto</param-value>
+	</context-param>
+  	
+  	<context-param>   
+		<param-name>com.sun.faces.writeStateAtFormEnd</param-name>   
+		<param-value>false</param-value>   
+	</context-param> 
+	
+	<context-param>
+	  <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+	  <param-value>6Lddju8SAAAAAH1Tig6Evf6YcMk0VUPgGwnCC3x3</param-value>
+	</context-param>
+ 
+	 <context-param>
+        <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+        <param-value>6Lddju8SAAAAAKCSnhW_sTvS5O3I5r87SwIV7DD7</param-value>
+    </context-param>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+</web-app>
